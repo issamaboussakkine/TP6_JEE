@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil - Gestion Issam</title>
+</head>
+<body>
+<h1>Bienvenue sur le TP6 de Issam</h1>
+
+<div th:switch="${personnes}">
+    <h2 th:case="null">Aucune personne enregistrée pour le moment !</h2>
+
+    <div th:case="*">
+        <h2>Liste des personnes</h2>
+
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="personne : ${personnes}">
+                <td th:text="${personne.name}"></td>
+                <td th:text="${personne.email}"></td>
+                <td><a th:href="@{/modifier/{id}(id=${personne.id})}">Modifier</a></td>
+                <td><a th:href="@{/supprimer/{id}(id=${personne.id})}"
+                       onclick="return confirm('Supprimer cette personne ?')">Supprimer</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+<p><a href="/inscription">Ajouter une nouvelle personne</a></p>
+</body>
+</html>+²
